@@ -1,12 +1,13 @@
 import { AppContextProvider } from './AppContext'
 import { AppRoutes } from './AppRoutes'
+import { AuthProvider } from './features/auth/AuthContext'
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <AppContextProvider>
-      <AppRoutes />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </AppContextProvider>
   )
 }

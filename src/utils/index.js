@@ -1,3 +1,4 @@
 import { login, logout, getCurrentUser } from './mockAuthService'
+import { mockUser } from './mockUser'
 
-export { login, logout, getCurrentUser }
+export { mockUser, login, logout, getCurrentUser }

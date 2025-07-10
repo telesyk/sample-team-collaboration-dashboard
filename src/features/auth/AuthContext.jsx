@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 import {
   login as fakeLogin,
   logout as fakeLogout,
@@ -35,3 +35,5 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
+
+export const useAuth = () => useContext(AuthContext)
