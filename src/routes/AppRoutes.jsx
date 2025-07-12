@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router'
+import { PATHS } from '@/constants'
+import AuthPrivateRoute from '@/features/auth/AuthPrivateRoute'
 import Home from '@/pages/Home'
 import Settings from '@/pages/Settings'
-import AuthPrivateRoute from '@/features/auth/AuthPrivateRoute'
-import { PATHS } from '@/constants'
+import AuthPage from '@/pages/AuthPage'
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
             </AuthPrivateRoute>
           }
         />
+        <Route path={PATHS.auth} element={<AuthPage />} />
         <Route path={PATHS.settings} element={<Settings />} />
       </Routes>
     </Router>
