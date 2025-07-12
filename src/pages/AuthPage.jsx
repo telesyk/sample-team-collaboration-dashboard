@@ -1,5 +1,5 @@
-import { PageTemplate, PageWrapper } from '../components'
-import { mockUser } from '../utils'
+import { PageTemplate, PageWrapper } from '@/components'
+import { mockUser } from '@/utils'
 
 export default function AuthPage() {
   return (
