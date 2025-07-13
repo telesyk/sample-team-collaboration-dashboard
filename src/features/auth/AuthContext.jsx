@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react'
 import {
-  login as fakeLogin,
-  logout as fakeLogout,
+  login as userLogin,
+  logout as userLogout,
   getCurrentUser,
 } from '../../utils'
 
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const loggedUser = await fakeLogin(email, password)
+      const loggedUser = await userLogin(email, password)
       setUser(loggedUser)
     } catch (error) {
       throw error
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
   }
 
   const logout = async () => {
-    fakeLogout()
+    userLogout()
     setUser(null)
   }
 
