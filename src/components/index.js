@@ -1,7 +1,5 @@
 import Button from './ui/Button'
-import PageWrapper from './layouts/PageWrapper'
-import PageFooter from './layouts/PageFooter'
-import PageHeader from './layouts/PageHeader'
-import PageTemplate from './layouts/PageTemplate'
+import { Navbar } from './layouts/Navbar'
+import PageTemplate from './layouts/PageTemplate/index'
 
-export { Button, PageWrapper, PageFooter, PageHeader, PageTemplate }
+export { Button, PageTemplate, Navbar }

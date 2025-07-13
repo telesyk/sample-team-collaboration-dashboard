@@ -1,9 +1,8 @@
-import Navbar from './Navbar'
-import NavbarButtons from './Navbar/NavbarButtons'
-import NavbarMenu from './Navbar/NavbarMenu'
-import NavbarTitle from './Navbar/NavbarTitle'
+import { useAuth } from '@/features/auth/AuthContext'
+import { Navbar, NavbarButtons, NavbarMenu, NavbarTitle } from '../Navbar'
 
 export default function PageHeader() {
+  const { user } = useAuth()
   return (
     <Navbar
       options={{
@@ -20,9 +19,9 @@ export default function PageHeader() {
         ],
       }}
     >
-      <NavbarMenu />
+      {user && <NavbarMenu />}
       <NavbarTitle />
-      <NavbarButtons />
+      {user && <NavbarButtons />}
     </Navbar>
   )
 }

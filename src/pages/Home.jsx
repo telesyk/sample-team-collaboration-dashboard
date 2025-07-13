@@ -1,9 +1,9 @@
-import { PageWrapper } from '../components'
+import { PageTemplate } from '@/components'
 
 export default function Home() {
   return (
-    <PageWrapper>
+    <PageTemplate>
       <h1 className="text-xl">Home page</h1>
-    </PageWrapper>
+    </PageTemplate>
   )
 }

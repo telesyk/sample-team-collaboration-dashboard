@@ -9,16 +9,16 @@ export function AppRoutes() {
   return (
     <Router>
       <Routes>
+        <Route path={PATHS.home} element={<Home />} />
+        <Route path={PATHS.auth} element={<AuthPage />} />
         <Route
-          path={PATHS.home}
+          path={PATHS.settings}
           element={
             <AuthPrivateRoute>
-              <Home />
+              <Settings />
             </AuthPrivateRoute>
           }
         />
-        <Route path={PATHS.auth} element={<AuthPage />} />
-        <Route path={PATHS.settings} element={<Settings />} />
       </Routes>
     </Router>
   )

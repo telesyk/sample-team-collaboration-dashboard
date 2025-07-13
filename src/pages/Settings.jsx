@@ -1,9 +1,9 @@
-import { PageWrapper } from '../components'
+import { PageTemplate } from '@/components'
 
 export default function Settings() {
   return (
-    <PageWrapper>
+    <PageTemplate>
       <h1 className="text-xl">Settings</h1>
-    </PageWrapper>
+    </PageTemplate>
   )
 }
