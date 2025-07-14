@@ -4,4 +4,19 @@ export const PATHS = {
   home: '/',
   auth: '/auth',
   settings: '/settings',
+  profile: '/profile',
 }
+export const MAIN_MENU = [
+  {
+    title: 'Home',
+    url: PATHS.home,
+  },
+  {
+    title: 'Settings',
+    url: PATHS.settings,
+  },
+  {
+    title: 'Profile',
+    url: PATHS.profile,
+  },
+]

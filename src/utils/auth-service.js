@@ -1,22 +1,17 @@
 import { STORAGE_AUTH_NAME } from '../constants'
-import { getUserCredentials } from './mockUser'
+import { getUserCredentials } from './user-credentials'
 
 export function login(email, password) {
-  // if (email === mockUser.email && password === mockUser.password) {
-  //   localStorage.setItem(STORAGE_AUTH_NAME, mockUser)
-  //   return mockUser
-  // }
   const user = getUserCredentials()
-  const isAcceptable = user[email] === email && user[password] === password
+  const isAcceptable = user.email === email && user.password === password
 
   if (isAcceptable) {
     localStorage.setItem(STORAGE_AUTH_NAME, JSON.stringify(user))
-    console.log('User entered', user)
     return user
   }
 
   return {
-    erroMessage: 'Can not login with your credentials',
+    errorMessage: 'Wrong credentials. Try once more.',
   }
 }
 

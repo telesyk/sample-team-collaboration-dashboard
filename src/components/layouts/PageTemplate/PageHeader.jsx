@@ -1,5 +1,6 @@
 import { useAuth } from '@/features/auth/AuthContext'
 import { Navbar, NavbarButtons, NavbarMenu, NavbarTitle } from '../Navbar'
+import { MAIN_MENU } from '@/constants'
 
 export default function PageHeader() {
   const { user } = useAuth()
@@ -7,19 +8,10 @@ export default function PageHeader() {
     <Navbar
       options={{
         isProfile: true,
-        menuList: [
-          {
-            url: '/settings',
-            title: 'Settings',
-          },
-          {
-            url: '/',
-            title: 'Home',
-          },
-        ],
+        menuList: MAIN_MENU,
       }}
     >
-      {user && <NavbarMenu />}
+      <NavbarMenu />
       <NavbarTitle />
       {user && <NavbarButtons />}
     </Navbar>

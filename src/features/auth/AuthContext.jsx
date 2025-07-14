@@ -8,17 +8,26 @@ import {
 export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
+  const [data, setData] = useState(null) /* data = {user, errorMessage} */
 
   useEffect(() => {
     const user = getCurrentUser()
-    if (user) setUser(user)
+    if (user) setData(prev => ({ ...prev, user: user }))
   }, [])
 
   const login = async (email, password) => {
     try {
-      const loggedUser = await userLogin(email, password)
-      setUser(loggedUser)
+      const loginResponse = await userLogin(email, password)
+
+      !loginResponse?.errorMessage
+        ? setData({
+            user: loginResponse,
+            errorMessage: null,
+          })
+        : setData({
+            ...loginResponse,
+            user: null,
+          })
     } catch (error) {
       throw error
     }
@@ -26,11 +35,11 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     userLogout()
-    setUser(null)
+    setData(null)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ ...data, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
