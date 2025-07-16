@@ -1,7 +1,17 @@
+import { useAuth } from '@/features'
 import { useNavbarContext } from './NavbarContext'
+import { useNavigate } from 'react-router'
+import { PATHS } from '@/constants'
+import { useEffect } from 'react'
 
 export default function NavbarButtons() {
   const { isProfile } = useNavbarContext()
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate(PATHS.home)
+  }, [logout])
 
   return (
     <div className="inline-flex items-center gap-2">
@@ -53,7 +63,7 @@ export default function NavbarButtons() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={logout}>Logout</button>
             </li>
           </ul>
         </div>

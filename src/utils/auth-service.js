@@ -6,11 +6,10 @@ const DEMO_EMAIL = 'demo@mail.com' // Only for demo
 
 export function login(email, password) {
   // const user = getUserCredentials()
-  // Demo only
   const user = {
     email: DEMO_EMAIL,
     password: DEMO_PASSWORD,
-  }
+  } // Demo only
   const isAcceptable =
     user && user.email === email && password === user.password
 
