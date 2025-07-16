@@ -1,4 +1,4 @@
-import { useAuth } from '@/features/auth/AuthContext'
+import { useAuth } from '@/features'
 import { Navbar, NavbarButtons, NavbarMenu, NavbarTitle } from '../Navbar'
 import { MAIN_MENU } from '@/constants'
 

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router'
 import { PATHS } from '@/constants'
-import AuthPrivateRoute from '@/features/auth/AuthPrivateRoute'
+import { AuthPrivateRoute } from '@/features'
 import Home from '@/pages/Home'
 import Settings from '@/pages/Settings'
 import AuthPage from '@/pages/AuthPage'

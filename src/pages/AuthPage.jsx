@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAuth } from '@/features/auth/AuthContext'
+import { useAuth } from '@/features'
 import { PageTemplate } from '@/components'
 import { useNavigate } from 'react-router'
 import { PATHS } from '@/constants'
