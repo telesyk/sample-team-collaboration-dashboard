@@ -6,20 +6,15 @@ const DEMO_EMAIL = 'demo@mail.com' // Only for demo
 
 export function login(email, password) {
   // const user = getUserCredentials()
-  const user = {
-    email: DEMO_EMAIL,
-    password: DEMO_PASSWORD,
-  } // Demo only
-  const isAcceptable =
-    user && user.email === email && password === user.password
+  const isAcceptable = DEMO_EMAIL === email && password === DEMO_PASSWORD
 
   if (isAcceptable) {
     const fakeToken = 'demo-token-' + Date.now()
     sessionStorage.setItem(
       STORAGE_AUTH_NAME,
-      JSON.stringify({ email: user.email, token: fakeToken })
+      JSON.stringify({ email, token: fakeToken })
     )
-    return { email: user.email, token: fakeToken }
+    return { email, token: fakeToken }
   }
 
   return {
