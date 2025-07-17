@@ -1,45 +1,54 @@
 import { createContext, useState, useEffect, useContext } from 'react'
+import { auth } from './firebase'
 import {
-  login as userLogin,
-  logout as userLogout,
-  getCurrentUser,
-} from '../../utils'
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth'
 
 export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [data, setData] = useState(null) /* data = {user, errorMessage} */
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    const user = getCurrentUser()
-    if (user) setData(prev => ({ ...prev, user: user }))
+    onAuthStateChanged(auth, user => setUser(user))
   }, [])
 
   const login = async (email, password) => {
     try {
-      const loginResponse = await userLogin(email, password)
-
-      !loginResponse?.errorMessage
-        ? setData({
-            user: loginResponse,
-            errorMessage: null,
-          })
-        : setData({
-            ...loginResponse,
-            user: null,
-          })
+      await signInWithEmailAndPassword(auth, email, password)
     } catch (error) {
-      throw error
+      console.error(error)
+      setError(prev => ({
+        ...prev,
+        message: error.message,
+        code: error.code,
+      }))
+    }
+  }
+
+  const signup = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+      console.error(error)
+      setError(prev => ({
+        ...prev,
+        message: error.message,
+        code: error.code,
+      }))
     }
   }
 
   const logout = async () => {
-    userLogout()
-    setData(null)
+    await signOut(auth)
   }
 
   return (
-    <AuthContext.Provider value={{ ...data, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   )

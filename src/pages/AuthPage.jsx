@@ -1,23 +1,63 @@
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useAuth } from '@/features'
 import { PageTemplate } from '@/components'
 import { useNavigate } from 'react-router'
 import { PATHS } from '@/constants'
 
 export default function AuthPage() {
-  const { user, errorMessage, login } = useAuth()
+  const { user, login, error } = useAuth()
+  const [errorMessage, setErrorMessage] = useState(null)
   const navigate = useNavigate()
+  const emailRef = useRef()
+  const passwordRef = useRef()
 
   useEffect(() => {
     if (user) navigate(PATHS.profile)
   }, [user])
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
+  const handleSubmit = async event => {
+    event.preventDefault()
+
+    // Reset custom validity before validation
+    emailRef.current.setCustomValidity('')
+    passwordRef.current.setCustomValidity('')
+
+    const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    login(email, password)
+
+    if (!email) {
+      emailRef.current.setCustomValidity('Invalid email')
+      emailRef.current.reportValidity()
+      setErrorMessage(prev => ({
+        ...prev,
+        email: 'Invalid email',
+      }))
+      return
+    }
+
+    if (!password) {
+      passwordRef.current.setCustomValidity('Invalid password')
+      passwordRef.current.reportValidity()
+      setErrorMessage(prev => ({
+        ...prev,
+        password: 'Invalid password',
+      }))
+      return
+    }
+
+    setErrorMessage(null)
+    await login(email, password)
+  }
+
+  const handleEmailChange = () => {
+    emailRef.current.setCustomValidity('')
+    setErrorMessage(prev => ({ ...prev, email: null }))
+  }
+
+  const handlePasswordChange = () => {
+    passwordRef.current.setCustomValidity('')
+    setErrorMessage(prev => ({ ...prev, password: null }))
   }
 
   return (
@@ -29,7 +69,11 @@ export default function AuthPage() {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Login</legend>
 
-          {errorMessage && <div className="text-warning">{errorMessage}</div>}
+          {error && error.code && (
+            <div className="text-warning">
+              {error.code}: {error.message}
+            </div>
+          )}
 
           <label className="label" htmlFor="email">
             Email
@@ -38,10 +82,16 @@ export default function AuthPage() {
             id="email"
             name="email"
             type="email"
-            className={`input validator ${errorMessage ? 'border-error' : ''}`}
+            className="input validator"
             placeholder="Email"
             autoComplete="email"
+            ref={emailRef}
+            onChange={handleEmailChange}
+            aria-invalid={!!errorMessage?.email}
           />
+          {errorMessage && errorMessage.email && (
+            <div className="validator-hint">{errorMessage.email}</div>
+          )}
 
           <label className="label" htmlFor="password">
             Password
@@ -50,10 +100,16 @@ export default function AuthPage() {
             id="password"
             name="password"
             type="password"
-            className={`input validator ${errorMessage ? 'border-error' : ''}`}
+            className="input validator"
             placeholder="Password"
             autoComplete="current-password"
+            ref={passwordRef}
+            onChange={handlePasswordChange}
+            aria-invalid={!!errorMessage?.password}
           />
+          {errorMessage && errorMessage.password && (
+            <div className="validator-hint">{errorMessage.password}</div>
+          )}
 
           <button type="submit" className="btn btn-neutral mt-4">
             Login
