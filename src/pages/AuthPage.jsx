@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useAuth } from '@/features'
+import { useAuth } from '@/context'
 import { PageTemplate } from '@/components'
 import { useNavigate } from 'react-router'
 import { ERROR, PATHS } from '@/constants'
@@ -117,7 +117,7 @@ export default function AuthPage() {
             <div className="validator-hint">{errorMessage.password}</div>
           )}
 
-          <button type="submit" className="btn btn-neutral mt-4">
+          <button type="submit" className="btn btn-success mt-4">
             Login
           </button>
         </fieldset>

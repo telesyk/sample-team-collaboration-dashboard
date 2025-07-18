@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { useAuth } from './AuthContext'
+import { useAuth } from '@/context'
 import { PATHS } from '@/constants'
 
 export default function AuthPrivateRoute({ children }) {
