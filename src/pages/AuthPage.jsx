@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useAuth } from '@/features'
 import { PageTemplate } from '@/components'
 import { useNavigate } from 'react-router'
-import { PATHS } from '@/constants'
+import { ERROR, PATHS } from '@/constants'
 
 export default function AuthPage() {
   const { user, login, error } = useAuth()
@@ -27,21 +27,21 @@ export default function AuthPage() {
     const password = formData.get('password')
 
     if (!email) {
-      emailRef.current.setCustomValidity('Invalid email')
+      emailRef.current.setCustomValidity(ERROR.invalid.email)
       emailRef.current.reportValidity()
       setErrorMessage(prev => ({
         ...prev,
-        email: 'Invalid email',
+        email: ERROR.invalid.email,
       }))
       return
     }
 
     if (!password) {
-      passwordRef.current.setCustomValidity('Invalid password')
+      passwordRef.current.setCustomValidity(ERROR.invalid.password)
       passwordRef.current.reportValidity()
       setErrorMessage(prev => ({
         ...prev,
-        password: 'Invalid password',
+        password: ERROR.invalid.password,
       }))
       return
     }
@@ -69,10 +69,16 @@ export default function AuthPage() {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Login</legend>
 
-          {error && error.code && (
-            <div className="text-warning">
-              {error.code}: {error.message}
-            </div>
+          {error && error.message && (
+            <details className="overflow-auto">
+              <summary className="text-warning">
+                {ERROR.invalid.credentials}
+              </summary>
+              <pre data-prefix=">" className="text-error">
+                <code className="me-2">❌</code>
+                <code>{error.message}</code>
+              </pre>
+            </details>
           )}
 
           <label className="label" htmlFor="email">

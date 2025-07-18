@@ -11,7 +11,7 @@ export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
-  const [error, setError] = useState(null)
+  const [errorMessage, setError] = useState(null)
 
   useEffect(() => {
     onAuthStateChanged(auth, user => setUser(user))
@@ -21,12 +21,12 @@ export function AuthProvider({ children }) {
     try {
       await signInWithEmailAndPassword(auth, email, password)
     } catch (error) {
-      console.error(error)
       setError(prev => ({
         ...prev,
         message: error.message,
         code: error.code,
       }))
+      console.error(error)
     }
   }
 
@@ -48,7 +48,9 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, signup }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, signup, error: errorMessage }}
+    >
       {children}
     </AuthContext.Provider>
   )
