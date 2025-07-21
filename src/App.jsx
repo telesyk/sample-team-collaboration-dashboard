@@ -1,14 +1,13 @@
-import { AppContextProvider } from './context/AppContext'
-import { AppRoutes } from './routes/AppRoutes'
-import { AuthProvider } from './features'
+import { AppProvider, AuthProvider } from '@/context'
+import { AppRoutes } from '@/routes/AppRoutes'
 
 function App() {
   return (
-    <AppContextProvider>
+    <AppProvider>
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>
-    </AppContextProvider>
+    </AppProvider>
   )
 }
 

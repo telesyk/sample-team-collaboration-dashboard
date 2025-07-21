@@ -20,3 +20,11 @@ export const MAIN_MENU = [
     url: PATHS.profile,
   },
 ]
+export const ERROR = {
+  invalid: {
+    email: 'Invalid email! Please, try you have registered.',
+    password: "Invalid password! Use the one you've registered.",
+    credentials: '❌ Invalid credentials!',
+    general: '📝 Check console log for more details!',
+  },
+}

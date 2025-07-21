@@ -35,15 +35,16 @@ An app where users can manage teams, projects, tasks, and statuses. Similar to T
 
 ### ⚙️ Tech Stack Recommendation
 
-| Purpose | Tech / Library |
-| --- | --- |
-| Core Framework | React 18+ |
-| Styling | Tailwind CSS + daisyUI |
-| Routing | React Router DOM |
-| State Management | Context API + `useReducer` |
-| Async Fetch | Native Fetch API / `axios` |
-| Component Lazy Load | `React.lazy()` + `Suspense` |
-| Error Handling | Custom Error Boundaries |
-| Drag & Drop | `@dnd-kit/core` or `react-dnd` |
-| Dev Environment | Vite or Create React App |
-| Testing *(opt)* | Vitest + React Testing Lib |
+| Purpose             | Tech / Library                 |
+| ------------------- | ------------------------------ |
+| Core Framework      | React 18+                      |
+| Styling             | Tailwind CSS + daisyUI         |
+| Auth                | Firebase                       |
+| Routing             | React Router DOM               |
+| State Management    | Context API + `useReducer`     |
+| Async Fetch         | Native Fetch API / `axios`     |
+| Component Lazy Load | `React.lazy()` + `Suspense`    |
+| Error Handling      | Custom Error Boundaries        |
+| Drag & Drop         | `@dnd-kit/core` or `react-dnd` |
+| Dev Environment     | Vite                           |
+| Testing _(opt)_     | Vitest + React Testing Lib     |
