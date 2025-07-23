@@ -1,4 +1,4 @@
-import { useAuth } from '@/features/auth'
+import { useAuth } from '@/features'
 import {
   Navbar,
   NavbarButtons,

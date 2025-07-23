@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { ERROR, PATHS, CONSTRAINT } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
-import { LoginForm, SignupForm } from '@/features/auth'
+import { LoginForm, SignupForm } from '@/features'
 
 export default function AuthPage() {
   const { user, login, loginWithGoogle, signup, error } = useAuth()

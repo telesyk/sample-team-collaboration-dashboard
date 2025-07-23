@@ -1,4 +1,4 @@
-import { useAuth } from '@/features/auth'
+import { useAuth } from '@/features'
 import { useNavbarContext } from './NavbarContext'
 import { useNavigate } from 'react-router'
 import { PATHS } from '@/constants'
