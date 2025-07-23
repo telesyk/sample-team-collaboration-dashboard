@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router'
 import { PATHS } from '@/constants'
-import { AuthPrivateRoute } from '@/features'
+import PrivateRoute from './PrivateRoute'
 import Home from '@/pages/Home'
 import Settings from '@/pages/Settings'
 import AuthPage from '@/pages/AuthPage'
@@ -15,17 +15,17 @@ export function AppRoutes() {
         <Route
           path={PATHS.settings}
           element={
-            <AuthPrivateRoute>
+            <PrivateRoute>
               <Settings />
-            </AuthPrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
           path={PATHS.profile}
           element={
-            <AuthPrivateRoute>
+            <PrivateRoute>
               <Profile />
-            </AuthPrivateRoute>
+            </PrivateRoute>
           }
         />
       </Routes>

@@ -4,22 +4,38 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  signInWithPopup,
 } from 'firebase/auth'
-import { auth } from '@/features/auth/firebase'
+import { auth, googleProvider } from '@/utils'
 
 export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [errorMessage, setError] = useState(null)
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     onAuthStateChanged(auth, user => setUser(user))
+    setLoading(!!user)
   }, [])
 
   const login = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+      setError(prev => ({
+        ...prev,
+        message: error.message,
+        code: error.code,
+      }))
+      console.error(error)
+    }
+  }
+
+  const loginWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider)
     } catch (error) {
       setError(prev => ({
         ...prev,
@@ -49,7 +65,15 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, signup, error: errorMessage }}
+      value={{
+        user,
+        login,
+        loginWithGoogle,
+        logout,
+        signup,
+        error: errorMessage,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -14,10 +14,17 @@ export const MAIN_MENU = [
   {
     title: 'Settings',
     url: PATHS.settings,
+    isAuthorized: true,
   },
   {
     title: 'Profile',
     url: PATHS.profile,
+    isAuthorized: true,
+  },
+  {
+    title: 'Authentication',
+    url: PATHS.auth,
+    isAuthorized: false,
   },
 ]
 export const ERROR = {
@@ -33,6 +40,7 @@ export const CONSTRAINT = {
     email: 'Email',
     password: 'Password',
     login: 'Login',
+    loginWithGoogle: 'Login with Google',
     signup: 'Sign Up',
     authentication: 'Authentication',
   },
