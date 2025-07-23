@@ -2,11 +2,11 @@ import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { ERROR, PATHS, CONSTRAINT } from '@/constants'
 import { useAuth } from '@/context'
-import { PageLoader, PageTemplate } from '@/components'
+import { PageTemplate } from '@/components'
 import { LoginForm, SignupForm } from '@/features/auth'
 
 export default function AuthPage() {
-  const { user, isLoading, login, loginWithGoogle, signup, error } = useAuth()
+  const { user, login, loginWithGoogle, signup, error } = useAuth()
   const [errorMessage, setErrorMessage] = useState(null)
   const [formMode, setFormMode] = useState('login') /* login | signup */
   const navigate = useNavigate()
@@ -69,8 +69,6 @@ export default function AuthPage() {
     passwordRef.current.setCustomValidity('')
     setErrorMessage(prev => ({ ...prev, password: null }))
   }
-
-  if (isLoading) <PageLoader />
 
   return (
     <PageTemplate>

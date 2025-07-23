@@ -1,5 +1,10 @@
 import { useAuth } from '@/features/auth'
-import { Navbar, NavbarButtons, NavbarMenu, NavbarTitle } from '../Navbar'
+import {
+  Navbar,
+  NavbarButtons,
+  NavbarMenu,
+  NavbarTitle,
+} from '@/components/layouts/Navbar'
 import { MAIN_MENU } from '@/constants'
 
 export default function PageHeader() {

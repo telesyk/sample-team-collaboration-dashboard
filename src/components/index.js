@@ -1,5 +1,4 @@
 import Button from './ui/Button'
-import { Navbar } from './layouts/Navbar'
-import { PageTemplate, PageLoader } from './layouts/PageTemplate'
+import Spinner from './ui/Spinner'
 
-export { Button, PageTemplate, PageLoader, Navbar }
+export { Button, Spinner }

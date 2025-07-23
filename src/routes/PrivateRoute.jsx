@@ -2,15 +2,18 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '@/context'
 import { PATHS } from '@/constants'
+import { Spinner } from '@/components'
 
 export default function PrivateRoute({ children }) {
-  const { user } = useAuth()
+  const { user, isLoading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user === undefined) return // Wait for auth to resolve
+    if (isLoading) return
     if (!user) navigate(PATHS.auth)
-  }, [user, navigate])
+  }, [user, isLoading])
+
+  if (isLoading) return <Spinner />
 
   return children
 }

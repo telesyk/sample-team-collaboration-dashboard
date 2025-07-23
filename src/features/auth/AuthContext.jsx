@@ -16,8 +16,10 @@ export function AuthProvider({ children }) {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    onAuthStateChanged(auth, user => setUser(user))
-    setLoading(!!user)
+    return onAuthStateChanged(auth, user => {
+      setUser(user)
+      setLoading(false) // <-- Set loading to false only after auth state is resolved
+    })
   }, [])
 
   const login = async (email, password) => {
