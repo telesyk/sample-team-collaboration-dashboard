@@ -4,7 +4,7 @@ import {
   NavbarButtons,
   NavbarMenu,
   NavbarTitle,
-} from '@/components/layouts/Navbar'
+} from '@/components/layouts'
 import { MAIN_MENU } from '@/constants'
 
 export default function PageHeader() {

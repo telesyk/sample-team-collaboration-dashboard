@@ -1,4 +1,4 @@
-import { PageTemplate } from '@/components'
+import { PageTemplate } from '@/components/layouts'
 import React from 'react'
 
 export default function Profile() {

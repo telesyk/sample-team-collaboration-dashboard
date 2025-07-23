@@ -1,4 +1,4 @@
-import { PageTemplate } from '@/components'
+import { PageTemplate } from '@/components/layouts'
 
 export default function Home() {
   return (

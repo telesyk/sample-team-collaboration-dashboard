@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { ERROR, PATHS, CONSTRAINT } from '@/constants'
 import { useAuth } from '@/context'
-import { PageTemplate } from '@/components'
+import { PageTemplate } from '@/components/layouts'
 import { LoginForm, SignupForm } from '@/features/auth'
 
 export default function AuthPage() {
