@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router'
+import { lazy, Suspense } from 'react'
 import { PATHS } from '@/constants'
-import PrivateRoute from './PrivateRoute'
+import { PageLoader } from '@/components/layouts'
 import Home from '@/pages/Home'
-import Settings from '@/pages/Settings'
 import AuthPage from '@/pages/AuthPage'
-import Profile from '@/pages/Profile'
+import PrivateRoute from './PrivateRoute'
+
+const Settings = lazy(() => import('@/pages/Settings'))
+const Profile = lazy(() => import('@/pages/Profile'))
 
 export function AppRoutes() {
   return (
@@ -15,17 +18,21 @@ export function AppRoutes() {
         <Route
           path={PATHS.settings}
           element={
-            <PrivateRoute>
-              <Settings />
-            </PrivateRoute>
+            <Suspense fallback={<PageLoader />}>
+              <PrivateRoute>
+                <Settings />
+              </PrivateRoute>
+            </Suspense>
           }
         />
         <Route
           path={PATHS.profile}
           element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
+            <Suspense fallback={<PageLoader />}>
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            </Suspense>
           }
         />
       </Routes>
