@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router'
+import { ERROR, PATHS, CONSTRAINT } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components'
-import { useNavigate } from 'react-router'
-import { ERROR, PATHS } from '@/constants'
 import LoginForm from '@/features/auth/LoginForm'
 import SignupForm from '@/features/auth/SignupForm'
 
 export default function AuthPage() {
   const { user, login, signup, error } = useAuth()
   const [errorMessage, setErrorMessage] = useState(null)
-  const [formMode, setFormMode] = useState('login')
+  const [formMode, setFormMode] = useState('login') /* login | signup */
   const navigate = useNavigate()
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -75,7 +75,9 @@ export default function AuthPage() {
     <PageTemplate>
       <form onSubmit={handleSubmit} className="max-w-xs mx-auto">
         <div className="space-y-4 mb-2">
-          <h1 className="text-2xl text-center">Authentication</h1>
+          <h1 className="text-2xl text-center">
+            {CONSTRAINT.form.authentication}
+          </h1>
         </div>
         <div role="tablist" className="tabs tabs-lift w-full">
           <a
@@ -87,7 +89,7 @@ export default function AuthPage() {
             }
             onClick={handleTab}
           >
-            Login
+            {CONSTRAINT.form.login}
           </a>
           <a
             role="tab"
@@ -98,7 +100,7 @@ export default function AuthPage() {
             }
             onClick={handleTab}
           >
-            Signup
+            {CONSTRAINT.form.signup}
           </a>
         </div>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
@@ -109,6 +111,7 @@ export default function AuthPage() {
               handleEmailChange={handleEmailChange}
               handlePasswordChange={handlePasswordChange}
               errorMessage={errorMessage}
+              constraint={CONSTRAINT.form}
             />
           ) : (
             <SignupForm
@@ -117,6 +120,7 @@ export default function AuthPage() {
               handleEmailChange={handleEmailChange}
               handlePasswordChange={handlePasswordChange}
               errorMessage={errorMessage}
+              constraint={CONSTRAINT.form}
             />
           )}
 

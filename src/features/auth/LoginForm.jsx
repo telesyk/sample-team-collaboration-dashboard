@@ -6,11 +6,12 @@ export default function LoginForm({
   handleEmailChange,
   handlePasswordChange,
   errorMessage,
+  constraint,
 }) {
   return (
     <>
       <label className="label" htmlFor="email">
-        Email
+        {constraint.email}
       </label>
       <input
         id="email"
@@ -28,7 +29,7 @@ export default function LoginForm({
       )}
 
       <label className="label" htmlFor="password">
-        Password
+        {constraint.password}
       </label>
       <input
         id="password"
@@ -46,7 +47,7 @@ export default function LoginForm({
       )}
 
       <button type="submit" className="btn btn-success my-4">
-        Login
+        {constraint.login}
       </button>
     </>
   )

@@ -28,3 +28,12 @@ export const ERROR = {
     general: '📝 Check console log for more details!',
   },
 }
+export const CONSTRAINT = {
+  form: {
+    email: 'Email',
+    password: 'Password',
+    login: 'Login',
+    signup: 'Sign Up',
+    authentication: 'Authentication',
+  },
+}
