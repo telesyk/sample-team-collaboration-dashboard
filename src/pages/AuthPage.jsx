@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
-import { ERROR, PATHS, CONSTRAINT } from '@/constants'
+import { ERROR, PATHS, CONSTRAINT, AUTH_MODE } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
 import { LoginForm, SignupForm } from '@/features'
@@ -8,7 +8,7 @@ import { LoginForm, SignupForm } from '@/features'
 export default function AuthPage() {
   const { user, login, loginWithGoogle, signup, error } = useAuth()
   const [errorMessage, setErrorMessage] = useState(null)
-  const [formMode, setFormMode] = useState('login') /* login | signup */
+  const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const navigate = useNavigate()
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -18,8 +18,8 @@ export default function AuthPage() {
   }, [user])
 
   const handleTab = () => {
-    setFormMode(prev => {
-      return prev === 'login' ? 'signup' : 'login'
+    setAuthMode(prev => {
+      return prev === AUTH_MODE.login ? AUTH_MODE.signup : AUTH_MODE.login
     })
   }
 
@@ -55,7 +55,7 @@ export default function AuthPage() {
     }
 
     setErrorMessage(null)
-    formMode === 'login'
+    authMode === AUTH_MODE.login
       ? await login(email, password)
       : await signup(email, password)
   }
@@ -82,7 +82,7 @@ export default function AuthPage() {
           <a
             role="tab"
             className={
-              formMode === 'login'
+              authMode === AUTH_MODE.login
                 ? 'tab basis-1/2 tab-active'
                 : 'tab basis-1/2'
             }
@@ -93,7 +93,7 @@ export default function AuthPage() {
           <a
             role="tab"
             className={
-              formMode === 'signup'
+              authMode === AUTH_MODE.signup
                 ? 'tab basis-1/2 tab-active'
                 : 'tab basis-1/2'
             }
@@ -103,7 +103,7 @@ export default function AuthPage() {
           </a>
         </div>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          {formMode === 'login' ? (
+          {authMode === AUTH_MODE.login ? (
             <LoginForm
               emailRef={emailRef}
               passwordRef={passwordRef}

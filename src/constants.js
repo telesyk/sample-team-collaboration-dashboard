@@ -45,3 +45,7 @@ export const CONSTRAINT = {
     authentication: 'Authentication',
   },
 }
+export const AUTH_MODE = {
+  login: 'login',
+  signup: 'signup',
+}

@@ -13,8 +13,22 @@ export function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path={PATHS.auth} element={<AuthPage />} />
+        <Route
+          index
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path={PATHS.auth}
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <AuthPage />
+            </Suspense>
+          }
+        />
         <Route
           path={PATHS.settings}
           element={
