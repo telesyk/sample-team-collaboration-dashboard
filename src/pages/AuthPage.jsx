@@ -55,7 +55,7 @@ export default function AuthPage() {
     }
 
     setErrorMessage(null)
-    formMode === login
+    formMode === 'login'
       ? await login(email, password)
       : await signup(email, password)
   }
