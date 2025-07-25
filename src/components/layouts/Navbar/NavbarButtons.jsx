@@ -1,9 +1,8 @@
-import { useAuth } from '@/features'
 import { useNavbarContext } from './NavbarContext'
+import { FaUserAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export default function NavbarButtons() {
-  const { isProfile } = useNavbarContext()
-  const { logout } = useAuth()
+  const { isProfile, profileImage, profileName, logout } = useNavbarContext()
 
   return (
     <div className="inline-flex items-center gap-2">
@@ -35,27 +34,29 @@ export default function NavbarButtons() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+              {profileImage ? (
+                <img title="user avatar" src={profileImage} />
+              ) : (
+                <FaUserAlt className="w-full h-auto" />
+              )}
             </div>
           </div>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
+            <li className="w-full">
+              <a className="inline-flex justify-between max-w-full">
+                <span className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {profileName}
+                </span>
+                <FaUserAlt />
               </a>
             </li>
             <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <button onClick={logout}>Logout</button>
+              <button onClick={logout} className="inline-flex justify-between">
+                Logout <FaSignOutAlt />
+              </button>
             </li>
           </ul>
         </div>
