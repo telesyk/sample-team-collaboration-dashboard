@@ -7,10 +7,6 @@ export const PATHS = {
 }
 export const MAIN_MENU = [
   {
-    title: 'Home',
-    url: PATHS.home,
-  },
-  {
     title: 'Settings',
     url: PATHS.settings,
     isAuthorized: true,

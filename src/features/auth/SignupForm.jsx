@@ -1,4 +1,4 @@
-import React from 'react'
+import { Button } from '@/components'
 
 export default function SignupForm({
   emailRef,
@@ -46,9 +46,9 @@ export default function SignupForm({
         <div className="validator-hint">{errorMessage.password}</div>
       )}
 
-      <button type="submit" className="btn btn-info my-4">
+      <Button type="submit" className="btn btn-info my-4">
         {constraint.signup}
-      </button>
+      </Button>
     </>
   )
 }
