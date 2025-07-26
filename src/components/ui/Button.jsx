@@ -1,7 +1,14 @@
-export default function Button({ children, onClick }) {
+export default function Button({
+  children,
+  className,
+  onClick,
+  ...restAttributes
+}) {
+  const classes = `btn ${className ? className : ''}`.trim()
+
   return (
-    <button className="btn btn-primary" onClick={onClick}>
-      {children}
+    <button className={classes} onClick={onClick} {...restAttributes}>
+      {children && children}
     </button>
   )
 }
