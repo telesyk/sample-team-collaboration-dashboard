@@ -45,3 +45,11 @@ export const AUTH_MODE = {
   signup: 'signup',
 }
 export const HEADER_TITLE = 'Canban Dashboard'
+export const ACTION = {
+  SET_USER: 'SET_USER',
+  SET_LOADING: 'SET_LOADING',
+  SET_ERROR: 'SET_ERROR',
+  CLEAR_ERROR: 'CLEAR_ERROR',
+  AUTH_MODE_LOGIN: AUTH_MODE.login,
+  AUTH_MODE_SIGNUP: AUTH_MODE.signup,
+}
