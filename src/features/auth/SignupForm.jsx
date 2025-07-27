@@ -5,7 +5,7 @@ export default function SignupForm({
   passwordRef,
   handleEmailChange,
   handlePasswordChange,
-  errorMessage,
+  fieldErrors,
   constraint,
 }) {
   return (
@@ -22,10 +22,10 @@ export default function SignupForm({
         autoComplete="email"
         ref={emailRef}
         onChange={handleEmailChange}
-        aria-invalid={!!errorMessage?.email}
+        aria-invalid={!!fieldErrors?.email}
       />
-      {errorMessage && errorMessage.email && (
-        <div className="validator-hint">{errorMessage.email}</div>
+      {fieldErrors && fieldErrors.email && (
+        <div className="validator-hint">{fieldErrors.email}</div>
       )}
 
       <label className="label" htmlFor="password">
@@ -40,10 +40,10 @@ export default function SignupForm({
         autoComplete="current-password"
         ref={passwordRef}
         onChange={handlePasswordChange}
-        aria-invalid={!!errorMessage?.password}
+        aria-invalid={!!fieldErrors?.password}
       />
-      {errorMessage && errorMessage.password && (
-        <div className="validator-hint">{errorMessage.password}</div>
+      {fieldErrors && fieldErrors.password && (
+        <div className="validator-hint">{fieldErrors.password}</div>
       )}
 
       <Button type="submit" className="btn btn-info my-4">
