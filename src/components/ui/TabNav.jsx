@@ -7,12 +7,13 @@ export default function TabNav({ tabs, activeTab, onTabChange }) {
         const isActive = activeTab === tab.id
         return (
           <Button
-            key={tab}
+            key={tab.id}
             type="button"
             role="tab"
             aria-selected={isActive}
             tabIndex={isActive ? 0 : -1}
-            className={'tab basis-full' + isActive && ' tab-active'}
+            mode="tab"
+            className={'flex-1 border-b-0' + (isActive ? ' tab-active' : '')}
             onClick={() => onTabChange(tab.id)}
           >
             {tab.label}

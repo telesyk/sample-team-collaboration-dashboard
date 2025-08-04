@@ -15,7 +15,7 @@ export default function AuthFields({
   const isPasswordError = formErrors && formErrors.password
 
   return (
-    <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+    <fieldset className="fieldset p-4 bg-base-200 border-base-300 rounded-box rounded-t-none w-xs border border-t-0">
       <label className="label" htmlFor="email">
         {constraint.email}
       </label>
