@@ -8,78 +8,78 @@ import {
 } from 'firebase/auth'
 import { auth, googleProvider } from '@/utils'
 import { ACTION } from '@/constants'
-import authReducer from './authReducer.js'
+import reducer from './reducer.js'
 
 export const AuthContext = createContext(null)
 
 const initialState = {
   user: null,
   error: null,
-  isLoading: true,
+  // isLoading: true,
 }
 
 export function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(authReducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
     return onAuthStateChanged(auth, user => {
-      dispatch({ type: ACTION.SET_USER, payload: user })
+      dispatch({ type: ACTION.AUTH.SET_USER, payload: user })
     })
   }, [])
 
   const login = async (email, password) => {
-    dispatch({ type: ACTION.SET_LOADING, payload: true })
+    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      dispatch({ type: ACTION.CLEAR_ERROR })
+      dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
     } catch (error) {
       dispatch({
-        type: ACTION.SET_ERROR,
+        type: ACTION.AUTH.SET_ERROR,
         payload: { message: error.message, code: error.code },
       })
       console.error(error)
     } finally {
-      dispatch({ type: ACTION.SET_LOADING, payload: false })
+      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const loginWithGoogle = async () => {
-    dispatch({ type: ACTION.SET_LOADING, payload: true })
+    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await signInWithPopup(auth, googleProvider)
-      dispatch({ type: ACTION.CLEAR_ERROR })
+      dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
     } catch (error) {
       dispatch({
-        type: ACTION.SET_ERROR,
+        type: ACTION.AUTH.SET_ERROR,
         payload: { message: error.message, code: error.code },
       })
       console.error(error)
     } finally {
-      dispatch({ type: ACTION.SET_LOADING, payload: false })
+      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const signup = async (email, password) => {
-    dispatch({ type: 'SET_LOADING', payload: true })
+    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await createUserWithEmailAndPassword(auth, email, password)
-      dispatch({ type: 'CLEAR_ERROR' })
+      dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
     } catch (error) {
       dispatch({
-        type: 'SET_ERROR',
+        type: ACTION.AUTH.SET_ERROR,
         payload: { message: error.message, code: error.code },
       })
       console.error(error)
     } finally {
-      dispatch({ type: 'SET_LOADING', payload: false })
+      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const logout = async () => {
-    dispatch({ type: 'SET_LOADING', payload: true })
+    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     await signOut(auth)
-    dispatch({ type: 'SET_USER', payload: null })
-    dispatch({ type: 'SET_LOADING', payload: false })
+    dispatch({ type: ACTION.AUTH.SET_USER, payload: null })
+    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
   }
 
   return (
@@ -91,7 +91,7 @@ export function AuthProvider({ children }) {
         logout,
         signup,
         error: state.error,
-        isLoading: state.isLoading,
+        // isLoading: state.isLoading,
       }}
     >
       {children}

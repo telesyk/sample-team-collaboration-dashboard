@@ -1,5 +1,4 @@
-import { AuthContext, AuthProvider, useAuth } from '@/context'
-import LoginForm from './auth/LoginForm'
-import SignupForm from './auth/SignupForm'
+import { AuthContext, AuthProvider, useAuth } from './auth/AuthContext'
+import AuthForm from './auth/AuthForm'
 
-export { AuthContext, AuthProvider, useAuth, LoginForm, SignupForm }
+export { AuthContext, AuthProvider, useAuth, AuthForm }
