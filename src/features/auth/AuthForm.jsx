@@ -25,13 +25,9 @@ export default function AuthForm({
         <Button
           type="button"
           role="tab"
-          aria-selected={authMode === AUTH_MODE.login}
-          tabIndex={authMode === AUTH_MODE.login ? 0 : -1}
-          className={
-            authMode === AUTH_MODE.login
-              ? 'tab basis-1/2 tab-active'
-              : 'tab basis-1/2'
-          }
+          aria-selected={isLoginMode}
+          tabIndex={isLoginMode ? 0 : -1}
+          className={isLoginMode ? 'tab basis-1/2 tab-active' : 'tab basis-1/2'}
           onClick={() => handleTabChange(AUTH_MODE.login)}
         >
           {constraint.login}
@@ -39,12 +35,10 @@ export default function AuthForm({
         <Button
           type="button"
           role="tab"
-          aria-selected={authMode === AUTH_MODE.signup}
-          tabIndex={authMode === AUTH_MODE.signup ? 0 : -1}
+          aria-selected={!isLoginMode}
+          tabIndex={!isLoginMode ? 0 : -1}
           className={
-            authMode === AUTH_MODE.signup
-              ? 'tab basis-1/2 tab-active'
-              : 'tab basis-1/2'
+            !isLoginMode ? 'tab basis-1/2 tab-active' : 'tab basis-1/2'
           }
           onClick={() => handleTabChange(AUTH_MODE.signup)}
         >
