@@ -22,12 +22,16 @@ export const MAIN_MENU = [
     isAuthorized: false,
   },
 ]
+export const MIN_PASSWORD_LENGTH = 8
+export const MIN_EMAIL_LENGTH = 6
 export const ERROR = {
   invalid: {
-    email: 'Invalid email! Please, try you have registered.',
-    password: "Invalid password! Use the one you've registered.",
-    credentials: '❌ Invalid credentials!',
-    general: '📝 Check console log for more details!',
+    email: `Email must be at least ${MIN_EMAIL_LENGTH} characters.`,
+    password: `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`,
+  },
+  empty: {
+    email: 'Please, enter a valid email address.',
+    password: 'Please, enter a valid password.',
   },
 }
 export const CONSTRAINT = {
@@ -46,10 +50,12 @@ export const AUTH_MODE = {
 }
 export const HEADER_TITLE = 'Canban Dashboard'
 export const ACTION = {
-  SET_USER: 'SET_USER',
-  SET_LOADING: 'SET_LOADING',
-  SET_ERROR: 'SET_ERROR',
-  CLEAR_ERROR: 'CLEAR_ERROR',
-  AUTH_MODE_LOGIN: AUTH_MODE.login,
-  AUTH_MODE_SIGNUP: AUTH_MODE.signup,
+  AUTH: {
+    SET_USER: 'AUTH_SET_USER',
+    SET_LOADING: 'AUTH_SET_LOADING',
+    SET_ERROR: 'AUTH_SET_ERROR',
+    CLEAR_ERROR: 'AUTH_CLEAR_ERROR',
+    MODE_LOGIN: AUTH_MODE.login,
+    MODE_SIGNUP: AUTH_MODE.signup,
+  },
 }

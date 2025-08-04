@@ -4,11 +4,11 @@ import { FaGoogle } from 'react-icons/fa'
 export default function LoginForm({
   emailRef,
   passwordRef,
-  handleEmailChange,
-  handlePasswordChange,
-  handleGoogleAuth,
-  fieldErrors,
+  formErrors,
   constraint,
+  onChangeEmail,
+  onChangePassword,
+  onGoogleAuth,
 }) {
   return (
     <>
@@ -19,15 +19,17 @@ export default function LoginForm({
         id="email"
         name="email"
         type="email"
-        className="input validator"
+        className={`input ${
+          formErrors && formErrors.email ? 'border-error' : ''
+        }`}
         placeholder="Email"
         autoComplete="email"
         ref={emailRef}
-        onChange={handleEmailChange}
-        aria-invalid={!!fieldErrors?.email}
+        aria-invalid={formErrors && formErrors.email}
+        onBlur={onChangeEmail}
       />
-      {fieldErrors && fieldErrors.email && (
-        <div className="validator-hint">{fieldErrors.email}</div>
+      {formErrors && formErrors.email && (
+        <div className="text-error">{formErrors.email}</div>
       )}
 
       <label className="label" htmlFor="password">
@@ -37,15 +39,17 @@ export default function LoginForm({
         id="password"
         name="password"
         type="password"
-        className="input validator"
+        className={`input ${
+          formErrors && formErrors.password ? 'border-error' : ''
+        }`}
         placeholder="Password"
         autoComplete="current-password"
         ref={passwordRef}
-        onChange={handlePasswordChange}
-        aria-invalid={!!fieldErrors?.password}
+        aria-invalid={formErrors && formErrors.password}
+        onBlur={onChangePassword}
       />
-      {fieldErrors && fieldErrors.password && (
-        <div className="validator-hint">{fieldErrors.password}</div>
+      {formErrors && formErrors.password && (
+        <div className="text-error">{formErrors.password}</div>
       )}
 
       <Button type="submit" className="btn btn-success my-4">
@@ -53,8 +57,8 @@ export default function LoginForm({
       </Button>
 
       <Button
-        onClick={handleGoogleAuth}
         className="btn bg-white text-black border-[#e5e5e5]"
+        onClick={onGoogleAuth}
       >
         <FaGoogle className="mr-2" />
         {constraint.loginWithGoogle}

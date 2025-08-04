@@ -3,10 +3,10 @@ import { Button } from '@/components'
 export default function SignupForm({
   emailRef,
   passwordRef,
-  handleEmailChange,
-  handlePasswordChange,
-  fieldErrors,
+  formErrors,
   constraint,
+  onChangeEmail,
+  onChangePassword,
 }) {
   return (
     <>
@@ -17,15 +17,17 @@ export default function SignupForm({
         id="email"
         name="email"
         type="email"
-        className="input validator"
+        className={`input ${
+          formErrors && formErrors.email ? 'border-error' : ''
+        }`}
         placeholder="Email"
         autoComplete="email"
         ref={emailRef}
-        onChange={handleEmailChange}
-        aria-invalid={!!fieldErrors?.email}
+        aria-invalid={formErrors && formErrors.email}
+        onBlur={onChangeEmail}
       />
-      {fieldErrors && fieldErrors.email && (
-        <div className="validator-hint">{fieldErrors.email}</div>
+      {formErrors && formErrors.email && (
+        <div className="text-error">{formErrors.email}</div>
       )}
 
       <label className="label" htmlFor="password">
@@ -35,15 +37,17 @@ export default function SignupForm({
         id="password"
         name="password"
         type="password"
-        className="input validator"
+        className={`input ${
+          formErrors && formErrors.password ? 'border-error' : ''
+        }`}
         placeholder="Password"
         autoComplete="current-password"
         ref={passwordRef}
-        onChange={handlePasswordChange}
-        aria-invalid={!!fieldErrors?.password}
+        aria-invalid={formErrors && formErrors.password}
+        onBlur={onChangePassword}
       />
-      {fieldErrors && fieldErrors.password && (
-        <div className="validator-hint">{fieldErrors.password}</div>
+      {formErrors && formErrors.password && (
+        <div className="text-error">{formErrors.password}</div>
       )}
 
       <Button type="submit" className="btn btn-info my-4">
