@@ -8,11 +8,18 @@ describe('Button', () => {
     expect(screen.getByText('Click me')).toBeInTheDocument()
   })
 
-  it('applies custom className', () => {
+  it('applies custom className and default mode', () => {
     render(<Button className="btn-primary">Test</Button>)
     const button = screen.getByRole('button')
     expect(button).toHaveClass('btn')
     expect(button).toHaveClass('btn-primary')
+  })
+
+  it('applies mode as className when not "button"', () => {
+    render(<Button mode="tab">Tab</Button>)
+    const button = screen.getByRole('button')
+    expect(button).toHaveClass('tab')
+    expect(button).not.toHaveClass('btn')
   })
 
   it('calls onClick when clicked', () => {
@@ -30,5 +37,11 @@ describe('Button', () => {
     )
     const button = screen.getByTestId('my-btn')
     expect(button).toHaveAttribute('type', 'submit')
+  })
+
+  it('renders nothing if no children', () => {
+    render(<Button />)
+    expect(screen.getByRole('button')).toBeInTheDocument()
+    expect(screen.getByRole('button').textContent).toBe('')
   })
 })
