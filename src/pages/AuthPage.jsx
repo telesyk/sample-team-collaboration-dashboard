@@ -23,13 +23,10 @@ export default function AuthPage() {
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const isValid = validate({ email, password })
+    const validation = validate({ email, password })
 
-    if (!isValid.email || !isValid.password) {
-      setFieldErrors({
-        email: !isValid.email && ERROR.invalid.email,
-        password: !isValid.password && ERROR.invalid.password,
-      })
+    if (Object.values(validation).some(error => error)) {
+      setFieldErrors({ ...validation })
       return
     }
 
@@ -42,25 +39,25 @@ export default function AuthPage() {
   }
 
   const handleEmailChange = () => {
-    const isEmailValid = validate({ email: emailRef.current.value }).email
+    const { email } = validate({ email: emailRef.current.value })
 
-    if (!isEmailValid) {
+    if (!email) {
       setFieldErrors(prev => ({
         ...prev,
-        email: ERROR.invalid.email,
+        email,
       }))
     }
   }
 
   const handlePasswordChange = () => {
-    const isPasswordValid = validate({
+    const { password } = validate({
       password: passwordRef.current.value,
-    }).password
+    })
 
-    if (!isPasswordValid) {
+    if (!password) {
       setFieldErrors(prev => ({
         ...prev,
-        password: ERROR.invalid.password,
+        password,
       }))
     }
   }
