@@ -7,7 +7,7 @@ import { AuthForm } from '@/features'
 import { formValidate as validate } from '@/utils'
 
 export default function AuthPage() {
-  const { user, login, loginWithGoogle, signup } = useAuth()
+  const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
   const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
@@ -78,6 +78,7 @@ export default function AuthPage() {
         passwordRef={passwordRef}
         formErrors={fieldErrors}
         constraint={CONSTRAINT.form}
+        isLoading={isLoading}
         handleSubmit={handleSubmit}
         handleTabChange={handleTabChange}
         handleEmailChange={handleEmailChange}

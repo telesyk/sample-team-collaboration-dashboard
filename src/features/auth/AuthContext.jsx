@@ -15,7 +15,7 @@ export const AuthContext = createContext(null)
 const initialState = {
   user: null,
   error: null,
-  // isLoading: true,
+  isLoading: true,
 }
 
 export function AuthProvider({ children }) {
@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (email, password) => {
-    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
+    dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await signInWithEmailAndPassword(auth, email, password)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
@@ -39,12 +39,12 @@ export function AuthProvider({ children }) {
       })
       console.error(error)
     } finally {
-      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
+      dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const loginWithGoogle = async () => {
-    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
+    dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await signInWithPopup(auth, googleProvider)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
@@ -55,12 +55,12 @@ export function AuthProvider({ children }) {
       })
       console.error(error)
     } finally {
-      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
+      dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const signup = async (email, password) => {
-    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
+    dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     try {
       await createUserWithEmailAndPassword(auth, email, password)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
@@ -71,15 +71,15 @@ export function AuthProvider({ children }) {
       })
       console.error(error)
     } finally {
-      // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
+      dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
   }
 
   const logout = async () => {
-    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
+    dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
     await signOut(auth)
     dispatch({ type: ACTION.AUTH.SET_USER, payload: null })
-    // dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
+    dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
   }
 
   return (
@@ -91,7 +91,7 @@ export function AuthProvider({ children }) {
         logout,
         signup,
         error: state.error,
-        // isLoading: state.isLoading,
+        isLoading: state.isLoading,
       }}
     >
       {children}

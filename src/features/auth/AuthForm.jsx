@@ -8,6 +8,7 @@ export default function AuthForm({
   emailRef,
   passwordRef,
   formErrors,
+  isLoading,
   handleSubmit,
   handleEmailChange,
   handlePasswordChange,
@@ -35,6 +36,7 @@ export default function AuthForm({
         formErrors={formErrors}
         constraint={constraint}
         isLoginMode={isLoginMode}
+        isLoading={isLoading}
         onChangeEmail={handleEmailChange}
         onChangePassword={handlePasswordChange}
         onGoogleAuth={handleGoogleAuth}
