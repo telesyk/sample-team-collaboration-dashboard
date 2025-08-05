@@ -7,7 +7,7 @@ import { AuthForm } from '@/features'
 import { formValidate as validate } from '@/utils'
 
 export default function AuthPage() {
-  const { user, login, loginWithGoogle, signup } = useAuth()
+  const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
   const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
@@ -23,13 +23,10 @@ export default function AuthPage() {
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const isValid = validate({ email, password })
+    const validation = validate({ email, password })
 
-    if (!isValid.email || !isValid.password) {
-      setFieldErrors({
-        email: !isValid.email && ERROR.invalid.email,
-        password: !isValid.password && ERROR.invalid.password,
-      })
+    if (Object.values(validation).some(error => error)) {
+      setFieldErrors({ ...validation })
       return
     }
 
@@ -42,25 +39,25 @@ export default function AuthPage() {
   }
 
   const handleEmailChange = () => {
-    const isEmailValid = validate({ email: emailRef.current.value }).email
+    const { email } = validate({ email: emailRef.current.value })
 
-    if (!isEmailValid) {
+    if (!email) {
       setFieldErrors(prev => ({
         ...prev,
-        email: ERROR.invalid.email,
+        email,
       }))
     }
   }
 
   const handlePasswordChange = () => {
-    const isPasswordValid = validate({
+    const { password } = validate({
       password: passwordRef.current.value,
-    }).password
+    })
 
-    if (!isPasswordValid) {
+    if (!password) {
       setFieldErrors(prev => ({
         ...prev,
-        password: ERROR.invalid.password,
+        password,
       }))
     }
   }
@@ -78,6 +75,7 @@ export default function AuthPage() {
         passwordRef={passwordRef}
         formErrors={fieldErrors}
         constraint={CONSTRAINT.form}
+        isLoading={isLoading}
         handleSubmit={handleSubmit}
         handleTabChange={handleTabChange}
         handleEmailChange={handleEmailChange}

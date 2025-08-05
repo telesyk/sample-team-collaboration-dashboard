@@ -1,4 +1,4 @@
-import { Button } from '@/components'
+import { Button, Spinner } from '@/components'
 import { FaGoogle } from 'react-icons/fa'
 
 export default function AuthFields({
@@ -7,6 +7,7 @@ export default function AuthFields({
   formErrors,
   constraint,
   isLoginMode,
+  isLoading,
   onChangeEmail,
   onChangePassword,
   onGoogleAuth,
@@ -50,12 +51,16 @@ export default function AuthFields({
         <div className="text-error">{formErrors.password}</div>
       )}
 
-      <Button
-        type="submit"
-        className={'btn my-4' + (isLoginMode ? ' btn-success' : ' btn-info')}
-      >
-        {isLoginMode ? constraint.login : constraint.signup}
-      </Button>
+      {isLoading ? (
+        <Spinner className="mx-auto my-4" />
+      ) : (
+        <Button
+          type="submit"
+          className={'btn my-4' + (isLoginMode ? ' btn-success' : ' btn-info')}
+        >
+          {isLoginMode ? constraint.login : constraint.signup}
+        </Button>
+      )}
 
       {isLoginMode && (
         <Button

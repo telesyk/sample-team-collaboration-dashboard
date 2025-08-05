@@ -1,4 +1,3 @@
-export const STORAGE_AUTH_NAME = 'auth'
 export const PATHS = {
   home: '/',
   auth: '/auth',
@@ -28,10 +27,6 @@ export const ERROR = {
   invalid: {
     email: `Email must be at least ${MIN_EMAIL_LENGTH} characters.`,
     password: `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`,
-  },
-  empty: {
-    email: 'Please, enter a valid email address.',
-    password: 'Please, enter a valid password.',
   },
 }
 export const CONSTRAINT = {
