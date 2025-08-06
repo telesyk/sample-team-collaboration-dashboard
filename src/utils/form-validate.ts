@@ -1,4 +1,4 @@
-import { MIN_EMAIL_LENGTH, MIN_PASSWORD_LENGTH, ERROR } from '@/constants'
+import { MIN_EMAIL_LENGTH, MIN_PASSWORD_LENGTH, ERROR } from '../constants'
 
 export default function formValidate({ email, password }) {
   const isEmailValid =
