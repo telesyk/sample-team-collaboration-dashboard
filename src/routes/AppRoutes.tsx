@@ -4,7 +4,7 @@ import { PATHS } from '@/constants'
 import { PageLoader } from '@/components/layouts'
 import Home from '@/pages/Home'
 import AuthPage from '@/pages/AuthPage'
-import PrivateRoute from './PrivateRoute'
+import PrivateRoute from '@/routes/PrivateRoute'
 
 const Settings = lazy(() => import('@/pages/Settings'))
 const Profile = lazy(() => import('@/pages/Profile'))

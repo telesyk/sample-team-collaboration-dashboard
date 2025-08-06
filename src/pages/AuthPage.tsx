@@ -3,27 +3,28 @@ import { useNavigate } from 'react-router'
 import { PATHS, CONSTRAINT, AUTH_MODE } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
-import { AuthForm } from '@/features'
+import { AuthForm } from '@/features/index'
 import { formValidate as validate } from '@/utils'
+import { AuthFieldTypes } from '@/types'
 
 export default function AuthPage() {
   const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
   const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
 
   useEffect(() => {
     if (user) navigate(PATHS.profile)
   }, [user])
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault()
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const validation = validate({ email, password })
+    const validation = validate({ email, password } as AuthFieldTypes)
 
     if (Object.values(validation).some(error => error)) {
       setFieldErrors({ ...validation })

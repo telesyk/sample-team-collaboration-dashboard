@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '@/context'
 import { PATHS } from '@/constants'
 import { PageLoader } from '@/components/layouts'
 
-export default function PrivateRoute({ children }) {
+export default function PrivateRoute({ children }: { children: ReactElement }) {
   const { user, isLoading } = useAuth()
   const navigate = useNavigate()
 
