@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
-import { PATHS, CONSTRAINT, AUTH_MODE, ERROR } from '@/constants'
+import { PATHS, CONSTRAINT, AUTH_MODE } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
 import { AuthForm } from '@/features'
