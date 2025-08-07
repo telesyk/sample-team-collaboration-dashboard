@@ -1,9 +1,14 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, ReactNode } from 'react'
+import type { AppContextType } from '@/types'
 
-export const AppContext = createContext(null)
+type AppProviderType = {
+  children: ReactNode
+}
 
-export function AppProvider({ children }) {
-  const [state, setState] = useState(null)
+export const AppContext = createContext<AppContextType | null>(null)
+
+export function AppProvider({ children }: AppProviderType) {
+  const [state, setState] = useState<any>(null)
   const handleAppState = setState
 
   return (

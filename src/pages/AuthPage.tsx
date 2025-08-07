@@ -5,7 +5,7 @@ import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
 import { AuthForm } from '@/features/index'
 import { formValidate as validate } from '@/utils'
-import { AuthFieldTypes } from '@/types'
+import { AuthFieldType } from '@/types'
 
 export default function AuthPage() {
   const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
@@ -24,7 +24,7 @@ export default function AuthPage() {
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const validation = validate({ email, password } as AuthFieldTypes)
+    const validation = validate({ email, password } as AuthFieldType)
 
     if (Object.values(validation).some(error => error)) {
       setFieldErrors({ ...validation })

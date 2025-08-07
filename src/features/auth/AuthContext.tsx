@@ -9,6 +9,7 @@ import {
 import { auth, googleProvider } from '@/utils'
 import { ACTION } from '@/constants'
 import reducer from './reducer.js'
+import { AuthFieldType, AuthContextType } from '@/types.js'
 
 export const AuthContext = createContext(null)
 
@@ -18,7 +19,7 @@ const initialState = {
   isLoading: true,
 }
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
@@ -27,17 +28,23 @@ export function AuthProvider({ children }) {
     })
   }, [])
 
-  const login = async (email, password) => {
+  const login = async (email: string, password: string): Promise<void> => {
     dispatch({ type: ACTION.AUTH.SET_LOADING, payload: true })
+
     try {
       await signInWithEmailAndPassword(auth, email, password)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
-    } catch (error) {
-      dispatch({
-        type: ACTION.AUTH.SET_ERROR,
-        payload: { message: error.message, code: error.code },
-      })
-      console.error(error)
+    } catch (error: unknown) {
+      if (error instanceof Error && 'code' in error) {
+        const authError = error as Error & { code: string }
+        dispatch({
+          type: ACTION.AUTH.SET_ERROR,
+          payload: { message: authError.message, code: authError.code },
+        })
+        console.error(authError)
+      } else {
+        console.error('Unknown error during login', error)
+      }
     } finally {
       dispatch({ type: ACTION.AUTH.SET_LOADING, payload: false })
     }
@@ -48,7 +55,7 @@ export function AuthProvider({ children }) {
     try {
       await signInWithPopup(auth, googleProvider)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
-    } catch (error) {
+    } catch (error: unknown) {
       dispatch({
         type: ACTION.AUTH.SET_ERROR,
         payload: { message: error.message, code: error.code },
@@ -64,7 +71,7 @@ export function AuthProvider({ children }) {
     try {
       await createUserWithEmailAndPassword(auth, email, password)
       dispatch({ type: ACTION.AUTH.CLEAR_ERROR })
-    } catch (error) {
+    } catch (error: unknown) {
       dispatch({
         type: ACTION.AUTH.SET_ERROR,
         payload: { message: error.message, code: error.code },
