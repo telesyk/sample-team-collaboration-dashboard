@@ -15,13 +15,13 @@ import {
 import { auth, googleProvider } from '@/utils'
 import { ACTION } from '@/constants'
 import reducer from './reducer.js'
-import { AuthContextType } from '@/types.js'
+import { AuthContextProps } from '@/types.js'
 
 type AuthProviderProps = {
   children: ReactNode
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null)
+export const AuthContext = createContext<AuthContextProps | null>(null)
 
 const initialState = {
   user: null,

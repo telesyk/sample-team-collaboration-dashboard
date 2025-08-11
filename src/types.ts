@@ -1,4 +1,4 @@
-import { FormEventHandler } from 'react'
+import { FormEventHandler, RefObject } from 'react'
 
 export interface AppContextType {
   state: any // Replace `any` with a real interface if possible
@@ -12,26 +12,37 @@ export type AuthFieldType = {
   password?: StringFieldType
 }
 
-export type AuthContextType = {
-  login?: Function | Object
-  logout?: Function | Object
-  signup?: Function | Object
-  loginWithGoogle?: Function | Object
-  isLoading?: boolean
-  error?: any
-  user?: any
+export type BooleanProp = boolean | undefined
+
+export type FunctionType = Function | Object | undefined
+
+export type EventHandlerType = React.FormEventHandler<
+  HTMLButtonElement | HTMLInputElement
+>
+
+export type AuthContextProps = {
+  login?: FunctionType
+  logout?: FunctionType
+  signup?: FunctionType
+  loginWithGoogle?: EventHandlerType
+  isLoading?: BooleanProp
+  error?: Object | null
+  user?: Object | null
 }
 
-export type AuthFormType = {
-  constraint: object | any
+export interface AuthFormInterface {
+  emailRef: RefObject<HTMLInputElement | null> | any
+  passwordRef: RefObject<HTMLInputElement | null> | any
+  formErrors: Record<string, string>
+  constraint: Record<string, string>
+  isLoading: BooleanProp
+}
+
+export interface AuthFormProps extends AuthFormInterface {
   authMode: string
-  emailRef: object
-  passwordRef: object
-  formErrors: object
-  isLoading: boolean
   handleSubmit: FormEventHandler
   handleEmailChange: FormEventHandler
   handlePasswordChange: FormEventHandler
-  handleGoogleAuth: FormEventHandler
-  handleTabChange: FormEventHandler
+  handleGoogleAuth: EventHandlerType | undefined
+  handleTabChange: FunctionType
 }

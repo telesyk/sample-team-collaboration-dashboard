@@ -1,16 +1,12 @@
 import { Button, Spinner } from '@/components'
+import { AuthFormInterface, EventHandlerType } from '@/types'
 import { FaGoogle } from 'react-icons/fa'
 
-type AuthFieldsProps = {
-  emailRef: React.RefObject<HTMLInputElement>
-  passwordRef: React.RefObject<HTMLInputElement>
-  formErrors: Record<string, string>
-  constraint: Record<string, string>
+interface AuthFieldsProps extends AuthFormInterface {
   isLoginMode: boolean
-  isLoading: boolean
-  onChangeEmail: React.FormEventHandler<HTMLInputElement>
-  onChangePassword: React.FormEventHandler<HTMLInputElement>
-  onGoogleAuth: React.MouseEventHandler<HTMLButtonElement>
+  onChangeEmail: EventHandlerType
+  onChangePassword: EventHandlerType
+  onGoogleAuth: EventHandlerType | undefined
 }
 
 export default function AuthFields({

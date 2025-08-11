@@ -1,6 +1,7 @@
 import { TabNav } from '@/components'
 import AuthFields from './AuthFields'
 import { AUTH_MODE } from '@/constants'
+import { AuthFormProps } from '@/types'
 
 export default function AuthForm({
   constraint,
@@ -14,7 +15,7 @@ export default function AuthForm({
   handlePasswordChange,
   handleGoogleAuth,
   handleTabChange,
-}) {
+}: AuthFormProps) {
   const isLoginMode = authMode === AUTH_MODE.login
 
   return (
