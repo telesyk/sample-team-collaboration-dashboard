@@ -1,6 +1,18 @@
 import { Button, Spinner } from '@/components'
 import { FaGoogle } from 'react-icons/fa'
 
+type AuthFieldsProps = {
+  emailRef: React.RefObject<HTMLInputElement>
+  passwordRef: React.RefObject<HTMLInputElement>
+  formErrors: Record<string, string>
+  constraint: Record<string, string>
+  isLoginMode: boolean
+  isLoading: boolean
+  onChangeEmail: React.FormEventHandler<HTMLInputElement>
+  onChangePassword: React.FormEventHandler<HTMLInputElement>
+  onGoogleAuth: React.MouseEventHandler<HTMLButtonElement>
+}
+
 export default function AuthFields({
   emailRef,
   passwordRef,
@@ -11,9 +23,9 @@ export default function AuthFields({
   onChangeEmail,
   onChangePassword,
   onGoogleAuth,
-}) {
-  const isEmailError = formErrors && formErrors.email
-  const isPasswordError = formErrors && formErrors.password
+}: AuthFieldsProps) {
+  const isEmailError = Boolean(formErrors && formErrors.email)
+  const isPasswordError = Boolean(formErrors && formErrors.password)
 
   return (
     <fieldset className="fieldset p-4 bg-base-200 border-base-300 rounded-box rounded-t-none w-xs border border-t-0">

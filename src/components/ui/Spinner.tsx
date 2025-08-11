@@ -1,3 +1,4 @@
-export default function Spinner() {
-  return <span className="loading loading-spinner loading-xl"></span>
+export default function Spinner({ className = '' }: { className?: string }) {
+  const classes = `loading loading-spinner ${className}`.trim()
+  return <span className={classes}></span>
 }

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router'
 import { useAuth } from '@/context'
 import { PATHS } from '@/constants'
 import { PageLoader } from '@/components/layouts'
+import { AuthContextType } from '@/types'
 
 export default function PrivateRoute({ children }: { children: ReactElement }) {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading } = useAuth() as AuthContextType
   const navigate = useNavigate()
 
   useEffect(() => {
