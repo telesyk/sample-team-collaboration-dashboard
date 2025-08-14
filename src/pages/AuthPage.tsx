@@ -5,15 +5,16 @@ import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
 import { AuthForm } from '@/features/index'
 import { formValidate as validate } from '@/utils'
-import { AuthFieldType } from '@/types'
+import { AuthContextProps, AuthFieldType } from '@/types'
 
 export default function AuthPage() {
-  const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
+  const { user, login, loginWithGoogle, signup, isLoading } =
+    useAuth() as AuthContextProps
   const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (user) navigate(PATHS.profile)
@@ -33,14 +34,20 @@ export default function AuthPage() {
 
     setFieldErrors({})
     if (authMode === AUTH_MODE.login) {
-      await login(email, password)
+      if (typeof login === 'function') {
+        await login(email, password)
+      }
     } else {
-      await signup(email, password)
+      if (typeof signup === 'function') {
+        await signup(email, password)
+      }
     }
   }
 
   const handleEmailChange = () => {
-    const { email } = validate({ email: emailRef.current.value })
+    const { email } = validate({
+      email: emailRef?.current?.value,
+    } as AuthFieldType)
 
     if (!email) {
       setFieldErrors(prev => ({
@@ -52,8 +59,8 @@ export default function AuthPage() {
 
   const handlePasswordChange = () => {
     const { password } = validate({
-      password: passwordRef.current.value,
-    })
+      password: passwordRef?.current?.value,
+    } as AuthFieldType)
 
     if (!password) {
       setFieldErrors(prev => ({
@@ -63,7 +70,7 @@ export default function AuthPage() {
     }
   }
 
-  const handleTabChange = mode => {
+  const handleTabChange = (mode: string) => {
     setAuthMode(mode)
     setFieldErrors({})
   }
