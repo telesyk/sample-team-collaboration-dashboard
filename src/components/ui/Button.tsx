@@ -16,7 +16,10 @@ export default function Button({
   onClick,
   ...restAttributes
 }: ButtonProps) {
-  const modeClassName = mode === 'button' ? 'btn' : mode
+  if (!children) return null
+
+  const modeClassName =
+    mode === 'button' ? 'btn' : mode === 'link' ? 'btn-link' : mode
   const classes = `${modeClassName} ${className ? className : ''}`.trim()
 
   return (

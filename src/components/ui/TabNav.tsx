@@ -1,6 +1,12 @@
 import { Button } from '@/components'
 
-export default function TabNav({ tabs, activeTab, onTabChange }) {
+type TabNavProps = {
+  tabs: { id: string; label: string }[]
+  activeTab: string
+  onTabChange: (tabId: string) => void
+}
+
+export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {
   return (
     <div role="tablist" className="tabs tabs-lift w-full">
       {tabs.map(tab => {
