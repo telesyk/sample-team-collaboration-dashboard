@@ -1,7 +1,7 @@
 import { MIN_EMAIL_LENGTH, MIN_PASSWORD_LENGTH, ERROR } from '@/constants'
-import { AuthFieldType } from '@/types'
+import { AuthFieldProps } from '@/types'
 
-export default function formValidate({ email, password }: AuthFieldType) {
+export default function formValidate({ email, password }: AuthFieldProps) {
   const isEmailValid =
     typeof email === 'string' &&
     email.length >= MIN_EMAIL_LENGTH &&

@@ -1,6 +1,11 @@
 import { createContext, useContext } from 'react'
 
-export const PageContext = createContext(null)
+export type PageProviderProps = {
+  children?: React.ReactNode
+  options?: Record<string, any>
+}
+
+export const PageContext = createContext<PageProviderProps | null>(null)
 
 export const usePageContext = () => {
   const context = useContext(PageContext)
@@ -10,7 +15,7 @@ export const usePageContext = () => {
   return context
 }
 
-export const PageProvider = ({ children, options }) => {
+export const PageProvider = ({ children, options }: PageProviderProps) => {
   return (
     <PageContext.Provider value={{ ...options }}>
       {children}

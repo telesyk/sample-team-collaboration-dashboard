@@ -1,9 +1,10 @@
 import { Button } from '@/components'
+import { CustomTabEvent } from '@/types'
 
 type TabNavProps = {
   tabs: { id: string; label: string }[]
   activeTab: string
-  onTabChange: (tabId: string) => void
+  onTabChange: CustomTabEvent
 }
 
 export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {

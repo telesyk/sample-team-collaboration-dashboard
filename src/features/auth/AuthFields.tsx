@@ -1,12 +1,12 @@
 import { Button, Spinner } from '@/components'
-import { AuthFormInterface, EventHandlerType } from '@/types'
+import { AuthFormInterface, CustomEventHandler } from '@/types'
 import { FaGoogle } from 'react-icons/fa'
 
 interface AuthFieldsProps extends AuthFormInterface {
   isLoginMode: boolean
-  onChangeEmail: EventHandlerType
-  onChangePassword: EventHandlerType
-  onGoogleAuth: EventHandlerType | undefined
+  onChangeEmail: CustomEventHandler
+  onChangePassword: CustomEventHandler
+  onGoogleAuth: CustomEventHandler
 }
 
 export default function AuthFields({

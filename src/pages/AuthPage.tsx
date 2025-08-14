@@ -5,7 +5,7 @@ import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
 import { AuthForm } from '@/features/index'
 import { formValidate as validate } from '@/utils'
-import { AuthContextProps, AuthFieldType } from '@/types'
+import { AuthContextProps, AuthFieldProps } from '@/types'
 
 export default function AuthPage() {
   const { user, login, loginWithGoogle, signup, isLoading } =
@@ -25,7 +25,7 @@ export default function AuthPage() {
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const validation = validate({ email, password } as AuthFieldType)
+    const validation = validate({ email, password } as AuthFieldProps)
 
     if (Object.values(validation).some(error => error)) {
       setFieldErrors({ ...validation })
@@ -47,7 +47,7 @@ export default function AuthPage() {
   const handleEmailChange = () => {
     const { email } = validate({
       email: emailRef?.current?.value,
-    } as AuthFieldType)
+    } as AuthFieldProps)
 
     if (!email) {
       setFieldErrors(prev => ({
@@ -60,7 +60,7 @@ export default function AuthPage() {
   const handlePasswordChange = () => {
     const { password } = validate({
       password: passwordRef?.current?.value,
-    } as AuthFieldType)
+    } as AuthFieldProps)
 
     if (!password) {
       setFieldErrors(prev => ({

@@ -1,3 +1,5 @@
+import { CustomEventHandler } from '@/types'
+
 type ButtonProps = {
   mode?: 'button' | 'tab' | 'link'
   children?: React.ReactNode
@@ -6,7 +8,7 @@ type ButtonProps = {
   disabled?: boolean
   [key: string]: any // Allow other HTML button attributes
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: CustomEventHandler
 }
 
 export default function Button({

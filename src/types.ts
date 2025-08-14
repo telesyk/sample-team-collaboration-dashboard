@@ -7,24 +7,26 @@ export interface AppContextType {
 
 export type StringFieldType = FormDataEntryValue | null
 
-export type AuthFieldType = {
+export type AuthFieldProps = {
   email?: StringFieldType
   password?: StringFieldType
 }
 
 export type BooleanProp = boolean | undefined
 
-export type FunctionType = Function | Object | undefined
+export type CustomMouseEvent = MouseEvent | Function | undefined
 
-export type EventHandlerType = React.FormEventHandler<
-  HTMLButtonElement | HTMLInputElement
->
+export type CustomTabEvent = (tabId?: string) => void
+
+export type CustomEventHandler =
+  | React.FormEventHandler<HTMLButtonElement | HTMLInputElement>
+  | undefined
 
 export type AuthContextProps = {
-  login?: FunctionType
-  logout?: FunctionType
-  signup?: FunctionType
-  loginWithGoogle?: EventHandlerType
+  login?: CustomMouseEvent
+  logout?: CustomEventHandler
+  signup?: CustomMouseEvent
+  loginWithGoogle?: CustomEventHandler
   isLoading?: BooleanProp
   error?: Object | null
   user?: Object | null
@@ -43,8 +45,8 @@ export interface AuthFormProps extends AuthFormInterface {
   handleSubmit: FormEventHandler
   handleEmailChange: FormEventHandler
   handlePasswordChange: FormEventHandler
-  handleGoogleAuth: EventHandlerType | undefined
-  handleTabChange: FunctionType
+  handleGoogleAuth: CustomEventHandler
+  handleTabChange: CustomTabEvent
 }
 
 export type NavbarItemProps = {
@@ -56,8 +58,8 @@ export type NavbarItemProps = {
 export type NavbarOptionsProps = {
   menuList?: Array<NavbarItemProps>
   isProfile?: boolean
-  profileImage?: string
-  profileName?: string
+  profileImage?: string | null
+  profileName?: string | null
   title?: string
-  logout?: () => void
+  logout?: CustomEventHandler
 }
