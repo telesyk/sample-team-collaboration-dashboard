@@ -1,5 +1,5 @@
 import PageContainer from './PageContainer'
-import { PageProvider } from './PageContext'
+import { PageProvider, PageProviderProps } from './PageContext'
 import PageFooter from './PageFooter'
 import PageHeader from './PageHeader'
 
@@ -7,7 +7,7 @@ import PageHeader from './PageHeader'
 export default function PageTemplate({
   children,
   options = { isFullWidth: false, isSidebar: false },
-}) {
+}: PageProviderProps) {
   const { isFullWidth } = options
 
   return (

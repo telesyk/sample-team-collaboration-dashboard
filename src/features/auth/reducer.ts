@@ -1,6 +1,13 @@
 import { ACTION } from '@/constants'
 
-export default function reducer(state, action) {
+type Action = {
+  type: string | null
+  payload?: Object | null
+}
+
+type State = Object | any
+
+export default function reducer(state: State, action: Action) {
   switch (action.type) {
     case ACTION.AUTH.SET_USER:
       return { ...state, user: action.payload, isLoading: false }

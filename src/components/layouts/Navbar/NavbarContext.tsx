@@ -1,7 +1,15 @@
 import { useContext } from 'react'
 import { createContext } from 'react'
+import { NavbarOptionsProps } from '@/types'
 
-export const NavbarContext = createContext(null)
+export type NavbarProviderProps = {
+  children: React.ReactNode
+  options: NavbarOptionsProps
+}
+
+export const NavbarContext = createContext<NavbarOptionsProps | undefined>(
+  undefined
+)
 
 export const useNavbarContext = () => {
   const context = useContext(NavbarContext)
@@ -13,7 +21,7 @@ export const useNavbarContext = () => {
   return context
 }
 
-export const NavbarProvider = ({ children, options }) => {
+export const NavbarProvider = ({ children, options }: NavbarProviderProps) => {
   return (
     <NavbarContext.Provider value={{ ...options }}>
       {children}

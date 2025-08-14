@@ -8,17 +8,24 @@ describe('Button', () => {
     expect(screen.getByText('Click me')).toBeInTheDocument()
   })
 
-  it('applies custom className and default mode', () => {
+  it('applies custom className and default mode ("button")', () => {
     render(<Button className="btn-primary">Test</Button>)
     const button = screen.getByRole('button')
     expect(button).toHaveClass('btn')
     expect(button).toHaveClass('btn-primary')
   })
 
-  it('applies mode as className when not "button"', () => {
+  it('applies mode "tab" as className when not "button"', () => {
     render(<Button mode="tab">Tab</Button>)
     const button = screen.getByRole('button')
     expect(button).toHaveClass('tab')
+    expect(button).not.toHaveClass('btn')
+  })
+
+  it('applies mode "link"', () => {
+    render(<Button mode="link">Tab</Button>)
+    const button = screen.getByRole('button')
+    expect(button).toHaveClass('btn-link')
     expect(button).not.toHaveClass('btn')
   })
 
@@ -41,7 +48,6 @@ describe('Button', () => {
 
   it('renders nothing if no children', () => {
     render(<Button />)
-    expect(screen.getByRole('button')).toBeInTheDocument()
-    expect(screen.getByRole('button').textContent).toBe('')
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
 })

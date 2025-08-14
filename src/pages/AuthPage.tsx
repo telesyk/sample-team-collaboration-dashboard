@@ -1,29 +1,31 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
-import { PATHS, CONSTRAINT, AUTH_MODE, ERROR } from '@/constants'
+import { PATHS, CONSTRAINT, AUTH_MODE } from '@/constants'
 import { useAuth } from '@/context'
 import { PageTemplate } from '@/components/layouts'
-import { AuthForm } from '@/features'
+import { AuthForm } from '@/features/index'
 import { formValidate as validate } from '@/utils'
+import { AuthContextProps, AuthFieldProps } from '@/types'
 
 export default function AuthPage() {
-  const { user, login, loginWithGoogle, signup, isLoading } = useAuth()
+  const { user, login, loginWithGoogle, signup, isLoading } =
+    useAuth() as AuthContextProps
   const [authMode, setAuthMode] = useState(AUTH_MODE.login) /* login | signup */
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (user) navigate(PATHS.profile)
   }, [user])
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault()
     const formData = new FormData(event.target)
     const email = formData.get('email')
     const password = formData.get('password')
-    const validation = validate({ email, password })
+    const validation = validate({ email, password } as AuthFieldProps)
 
     if (Object.values(validation).some(error => error)) {
       setFieldErrors({ ...validation })
@@ -32,14 +34,20 @@ export default function AuthPage() {
 
     setFieldErrors({})
     if (authMode === AUTH_MODE.login) {
-      await login(email, password)
+      if (typeof login === 'function') {
+        await login(email, password)
+      }
     } else {
-      await signup(email, password)
+      if (typeof signup === 'function') {
+        await signup(email, password)
+      }
     }
   }
 
   const handleEmailChange = () => {
-    const { email } = validate({ email: emailRef.current.value })
+    const { email } = validate({
+      email: emailRef?.current?.value,
+    } as AuthFieldProps)
 
     if (!email) {
       setFieldErrors(prev => ({
@@ -51,8 +59,8 @@ export default function AuthPage() {
 
   const handlePasswordChange = () => {
     const { password } = validate({
-      password: passwordRef.current.value,
-    })
+      password: passwordRef?.current?.value,
+    } as AuthFieldProps)
 
     if (!password) {
       setFieldErrors(prev => ({
@@ -62,7 +70,7 @@ export default function AuthPage() {
     }
   }
 
-  const handleTabChange = mode => {
+  const handleTabChange = (mode: string) => {
     setAuthMode(mode)
     setFieldErrors({})
   }

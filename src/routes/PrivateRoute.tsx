@@ -1,11 +1,12 @@
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '@/context'
 import { PATHS } from '@/constants'
 import { PageLoader } from '@/components/layouts'
+import { AuthContextProps } from '@/types'
 
-export default function PrivateRoute({ children }) {
-  const { user, isLoading } = useAuth()
+export default function PrivateRoute({ children }: { children: ReactElement }) {
+  const { user, isLoading } = useAuth() as AuthContextProps
   const navigate = useNavigate()
 
   useEffect(() => {

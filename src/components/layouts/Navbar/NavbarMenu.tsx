@@ -1,10 +1,13 @@
 import { NavLink } from 'react-router'
 import { useNavbarContext } from './NavbarContext'
 import { useAuth } from '@/context'
+import { NavbarItemProps } from '@/types'
 
 export default function NavbarMenu() {
-  const { menuList } = useNavbarContext()
-  const { user } = useAuth()
+  const { menuList = [] }: { menuList?: Array<NavbarItemProps> } =
+    useNavbarContext()
+  const auth = useAuth()
+  const user = auth?.user
 
   const currentMenu = !!user
     ? menuList.filter(menu => menu.isAuthorized)

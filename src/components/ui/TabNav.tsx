@@ -1,6 +1,13 @@
 import { Button } from '@/components'
+import { CustomTabEvent } from '@/types'
 
-export default function TabNav({ tabs, activeTab, onTabChange }) {
+type TabNavProps = {
+  tabs: { id: string; label: string }[]
+  activeTab: string
+  onTabChange: CustomTabEvent
+}
+
+export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {
   return (
     <div role="tablist" className="tabs tabs-lift w-full">
       {tabs.map(tab => {

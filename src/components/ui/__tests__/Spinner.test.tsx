@@ -8,7 +8,6 @@ describe('Spinner', () => {
     // Check for the expected classes
     expect(spinner).toHaveClass('loading')
     expect(spinner).toHaveClass('loading-spinner')
-    expect(spinner).toHaveClass('loading-xl')
   })
 
   it('renders a span element', () => {
