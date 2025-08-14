@@ -46,3 +46,18 @@ export interface AuthFormProps extends AuthFormInterface {
   handleGoogleAuth: EventHandlerType | undefined
   handleTabChange: FunctionType
 }
+
+export type NavbarItemProps = {
+  title: string
+  url: string
+  isAuthorized: boolean
+}
+
+export type NavbarOptionsProps = {
+  menuList?: Array<NavbarItemProps>
+  isProfile?: boolean
+  profileImage?: string
+  profileName?: string
+  title?: string
+  logout?: () => void
+}
